@@ -1,0 +1,36 @@
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div>
+		<div th:insert="~{commons/header :: header}"></div>
+		<div class="content">
+			<form action="/todos" method="post">
+				<ol>
+					<li>
+						<span>item1</span>
+						<a class="button" href="/todos/1">update</a>
+						<a class="button" href="/todos/1">delete</a>
+					</li>
+					<li>
+						<span>item2</span>
+						<a class="button" href="/todos/2">update</a>
+						<a class="button" href="/todos/2">delete</a>
+					</li>
+					<li>
+						<span>item3</span>
+						<a class="button" href="/todos/3">update</a>
+						<a class="button" href="/todos/3">delete</a>
+					</li>
+				</ol>
+				<div>
+					<a class="button" href="/todos/new">new</a>
+				</div>
+			</form>
+		</div>
+		<div th:insert="~{commons/footer :: footer}"></div>		
+	</div>
+</body>
+</html>

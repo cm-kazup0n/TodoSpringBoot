@@ -1,0 +1,26 @@
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div>
+		<div th:insert="~{commons/header :: header}"></div>
+		<div class="content">
+			<div th:if="${#fields.hasErrors('all')}">
+				<p th:text="#{common.error}">error</p>
+			</div>
+			<form th:action="@{/todos}" th:method="post" th:object="${todoForm}">
+				<div>
+					<input class="input" type="text" th:field="*{name}"/>
+				</div>
+				<div>
+					<input class="button" type="submit" value="new"></input>
+					<a class="button" href="/todos/">cancel</a>
+				</div>		
+			</form>
+		</div>
+		<div th:insert="~{commons/footer :: footer}"></div>
+	</div>
+</body>
+</html>
