@@ -7,12 +7,9 @@
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
 		<div class="content">
-			<div th:if="${#fields.hasErrors('all')}">
-				<p th:text="#{common.error}">error</p>
-			</div>
 			<form th:action="@{/todos}" th:method="post" th:object="${todoForm}">
 				<div>
-					<input class="input" type="text" th:field="*{name}"/>
+					<input class="input" type="text" th:field="*{title}"/>
 				</div>
 				<div>
 					<input class="button" type="submit" value="new"></input>

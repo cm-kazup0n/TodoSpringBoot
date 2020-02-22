@@ -8,21 +8,12 @@
 		<div th:insert="~{commons/header :: header}"></div>
 		<div class="content">
 			<form action="/todos" method="post">
-				<ol>
+				<ol th:each="todo : ${todos}">
 					<li>
-						<span>item1</span>
+						<input type="hidden" th:value="${todo.id}" />
+						<span th:text="${todo.title}"></span>
 						<a class="button" href="/todos/1">update</a>
 						<a class="button" href="/todos/1">delete</a>
-					</li>
-					<li>
-						<span>item2</span>
-						<a class="button" href="/todos/2">update</a>
-						<a class="button" href="/todos/2">delete</a>
-					</li>
-					<li>
-						<span>item3</span>
-						<a class="button" href="/todos/3">update</a>
-						<a class="button" href="/todos/3">delete</a>
 					</li>
 				</ol>
 				<div>

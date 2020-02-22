@@ -48,8 +48,9 @@ public class TodoController {
 			// TODO:Flash error message
 			return "todos/new";
 		}
+		todoService.save(todoForm.toTodo());
 		// RedirectAttributes
-		return "redirect:todos/index";
+		return "redirect:todos/";
 	}
 	
 	@GetMapping("new")
