@@ -6,7 +6,7 @@
 <body>
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
-		<div class="content">
+		<div class="container">
 			<form action="/todos" method="post">
 				<ol th:each="todo : ${todos}">
 					<li>
@@ -16,7 +16,7 @@
 						<a class="button" href="/todos/1">delete</a>
 					</li>
 				</ol>
-				<div>
+				<div class="control">
 					<a class="button" href="/todos/new">new</a>
 				</div>
 			</form>

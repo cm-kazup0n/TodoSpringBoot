@@ -6,14 +6,21 @@
 <body>
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
-		<div class="content">
+		<div class="container">
 			<form th:action="@{/todos}" th:method="post" th:object="${todoForm}">
-				<div>
-					<input class="input" type="text" th:field="*{title}"/>
+				<div class="field">
+					<label class="label">Title</label>
+					<div class="control">
+						<input class="input" type="text" th:field="*{title}"/>
+					</div>
 				</div>
-				<div>
-					<input class="button" type="submit" value="new"></input>
-					<a class="button" href="/todos/">cancel</a>
+				<div class="field is-grouped">
+					<div class="control">
+						<input class="button is-link" type="submit" value="Submit"></input>
+					</div>
+					<div class="control">
+						<a class="button is-link is-light" href="/todos/">Cancel</a>
+					</div>
 				</div>		
 			</form>
 		</div>
