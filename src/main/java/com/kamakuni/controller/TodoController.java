@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kamakuni.entity.Todo;
-import com.kamakuni.exception.ResourceNotFoundException;
 import com.kamakuni.form.TodoForm;
 import com.kamakuni.service.TodoService;
 

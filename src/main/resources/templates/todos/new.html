@@ -7,7 +7,7 @@
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
 		<div class="container">
-			<form th:action="@{/todos}" th:method="post" th:object="${todoForm}">
+			<form th:action="@{/todos}" th:method="POST" th:object="${todoForm}">
 				<div class="field">
 					<label class="label">Title</label>
 					<div class="control">

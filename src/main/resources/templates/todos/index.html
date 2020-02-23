@@ -8,8 +8,8 @@
 		<div th:insert="~{commons/header :: header}"></div>
 		<div class="container">
 			<form action="/todos" method="post">
-				<ol th:each="todo : ${todos}">
-					<li>
+				<ol class="list is-hoverable" th:each="todo : ${todos}">
+					<li class="list-item">
 						<input type="hidden" th:value="${todo.id}" />
 						<span th:text="${todo.title}"></span>
 						<a class="button" href="/todos/1">update</a>
