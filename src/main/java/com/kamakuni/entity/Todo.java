@@ -15,5 +15,8 @@ public class Todo extends BaseEntity {
 		
 	@Column(nullable = false)
 	private String title;
+	
+	@Column(nullable = false)
+	private Boolean done;
 
 }

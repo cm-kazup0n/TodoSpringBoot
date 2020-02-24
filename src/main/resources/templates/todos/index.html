@@ -7,13 +7,13 @@
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
 		<div class="container">
-			<form action="/todos" method="post">
-				<ol class="list is-hoverable" th:each="todo : ${todos}">
-					<li class="list-item">
+			<form action="/todos" th:method="POST">
+				<ol class="list is-hoverable">
+					<li class="list-item" th:each="todo : ${todos}">
 						<input type="hidden" th:value="${todo.id}" />
 						<span th:text="${todo.title}"></span>
-						<a class="button" href="/todos/1">update</a>
-						<a class="button" href="/todos/1">delete</a>
+						<a class="button" th:href="@{'/todos/' + ${todo.id} + '/edit'}">Edit</a>
+						<a class="button is-danger" th:href="@{'/todos/' + ${todo.id} + '/delete'}">Delete</a>
 					</li>
 				</ol>
 				<div class="control">

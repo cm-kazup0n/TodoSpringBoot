@@ -8,18 +8,24 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 
 import com.kamakuni.entity.Todo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@AllArgsConstructor
 @Data
 public class TodoForm {
-
+	
+	public static TodoForm create(Todo todo) {
+		return new TodoForm(todo.getTitle(), todo.getDone());
+	}
+	
 	@NotBlank(message = "name is required")
 	@Size(max=100)
 	private String title;
 	@NotNull
-	private Boolean done = true;
+	private Boolean done = false;
 	
 	public Todo toTodo() {
-		return new Todo(this.title);
+		return new Todo(this.title, this.done);
 	}
 }
