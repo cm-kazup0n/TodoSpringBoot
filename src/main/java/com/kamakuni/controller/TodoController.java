@@ -44,9 +44,22 @@ public class TodoController {
 		return "todos/index";
 	}
 
+	@PutMapping("{id}")
+	public String update(@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, @PathVariable Optional<Long> idOpt) {
+		if (bindingResult.hasErrors()) {
+			// TODO:Flash error message
+			StringBuilder url = new StringBuilder("todos/");
+			idOpt.map(id -> url.append(id));
+			return url.toString();
+		}
+		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
+		return "redirect:todos/";
+	}
+	
 	@DeleteMapping("{id}")
-	public String delete(@PathVariable Optional<Long> idOpt) {
-		idOpt.ifPresent(id -> todoService.deleteById(id));
+	public String destory(@PathVariable Optional<Long> idOpt) {
+
+		//idOpt.map(id -> todoService.deleteById(id));
 		return "todos/index";
 	}
 	
@@ -69,7 +82,7 @@ public class TodoController {
 	@GetMapping("{id}/edit")
 	public ModelAndView edit(@PathVariable("id") Optional<Long> idOpt, ModelAndView mav) {
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
-		mav.addObject("todoForm", TodoForm.create(todo));
+		mav.addObject("todoForm", TodoForm.create(todo.getId(), todo.getTitle(), todo.getDone()));
 		mav.setViewName("todos/edit");
 		return mav;
 	}
@@ -77,7 +90,7 @@ public class TodoController {
 	@GetMapping("{id}/delete")
 	public ModelAndView delete(@PathVariable("id") Optional<Long> idOpt, ModelAndView mav) {
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
-		mav.addObject("todoForm", TodoForm.create(todo));
+		mav.addObject("todoForm", TodoForm.create(todo.getId(), todo.getTitle(), todo.getDone()));
 		mav.setViewName("todos/delete");
 		return mav;
 	}

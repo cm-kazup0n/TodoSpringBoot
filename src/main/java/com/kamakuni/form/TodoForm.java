@@ -15,10 +15,11 @@ import lombok.Data;
 @Data
 public class TodoForm {
 	
-	public static TodoForm create(Todo todo) {
-		return new TodoForm(todo.getTitle(), todo.getDone());
+	public static TodoForm create(Long id, String title, Boolean done) {
+		return new TodoForm(id, title, done);
 	}
-	
+	@NotNull
+	private Long id;
 	@NotBlank(message = "name is required")
 	@Size(max=100)
 	private String title;
