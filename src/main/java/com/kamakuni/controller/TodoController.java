@@ -58,8 +58,7 @@ public class TodoController {
 	
 	@DeleteMapping("{id}")
 	public String destory(@PathVariable Optional<Long> idOpt) {
-
-		//idOpt.map(id -> todoService.deleteById(id));
+		idOpt.ifPresent(id -> todoService.deleteById(id));
 		return "todos/index";
 	}
 	
