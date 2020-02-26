@@ -45,6 +45,11 @@ public class TodoController {
 	}
 
 	@PutMapping("{id}")
+	public String update() {
+		return "redirect:todos/";
+	}
+	
+/*	@PutMapping("{id}")
 	public String update(@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, @PathVariable Optional<Long> idOpt) {
 		if (bindingResult.hasErrors()) {
 			// TODO:Flash error message
@@ -54,7 +59,7 @@ public class TodoController {
 		}
 		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
 		return "redirect:todos/";
-	}
+	}*/
 	
 	@DeleteMapping("{id}")
 	public String destory(@PathVariable Optional<Long> idOpt) {
