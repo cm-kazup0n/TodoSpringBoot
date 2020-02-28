@@ -10,8 +10,10 @@ import com.kamakuni.entity.Todo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class TodoForm {
 	
