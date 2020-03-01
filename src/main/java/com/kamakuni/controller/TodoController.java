@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kamakuni.entity.Todo;
 import com.kamakuni.form.TodoForm;
@@ -27,6 +29,9 @@ import com.kamakuni.service.TodoService;
 @Controller
 @RequestMapping("/todos")
 public class TodoController {
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	@Autowired
 	private TodoService todoService;
@@ -45,14 +50,16 @@ public class TodoController {
 	}
 
 	@PutMapping("{id}")
-	public ModelAndView update(@PathVariable("id") Optional<Long> idOpt,@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, ModelAndView mav) {
+	public ModelAndView update(@PathVariable("id") Optional<Long> idOpt,@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, ModelAndView mav, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			todoFormOpt.map(form -> mav.addObject("todoForm", form));
-			mav.setViewName("todos/edit");
+			redirectAttributes.addAttribute("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
+			mav.setViewName("redirect:/todos/edit");
 			return mav;
 		}
+		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
 		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
-		mav.setViewName("redirect:todos/");
+		mav.setViewName("redirect:/todos");
 		return mav;
 	}
 	
