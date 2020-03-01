@@ -57,16 +57,17 @@ public class TodoController {
 			mav.setViewName("redirect:/todos/edit");
 			return mav;
 		}
-		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
 		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
 		mav.setViewName("redirect:/todos");
+		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
 		return mav;
 	}
 	
 	@DeleteMapping("{id}")
-	public String destory(@PathVariable Optional<Long> idOpt) {
+	public String destory(@PathVariable("id") Optional<Long> idOpt, RedirectAttributes redirectAttributes) {
 		idOpt.ifPresent(id -> todoService.deleteById(id));
-		return "redirect:/";
+		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.delete", null, null));
+		return "redirect:/todos";
 	}
 	
 	@PostMapping
