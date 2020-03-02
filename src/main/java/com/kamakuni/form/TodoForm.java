@@ -20,7 +20,7 @@ public class TodoForm {
 	public static TodoForm create(Long id, String title, Boolean done) {
 		return new TodoForm(id, title, done);
 	}
-	@NotNull
+	
 	private Long id;
 	@NotBlank(message = "name is required")
 	@Size(max=100)

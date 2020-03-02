@@ -1,0 +1,27 @@
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	
+	<article class="message is-success" th:fragment="messageSuccess">
+	  <div class="message-header">
+	    <p>Success</p>
+	    <button class="delete" aria-label="delete"></button>
+	  </div>
+	  <div class="message-body">
+	    SUCCESS
+	  </div>
+	</article>
+
+	<article class="message is-danger" th:fragment="messageError">
+	  <div class="message-header">
+	    <p>Danger</p>
+	    <button class="delete" aria-label="delete"></button>
+	  </div>
+	  <div class="message-body">
+	    ERROR
+	  </div>
+	</article>
+
+</body>
+</html>

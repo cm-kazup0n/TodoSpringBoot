@@ -71,13 +71,13 @@ public class TodoController {
 	}
 	
 	@PostMapping
-	public String create(@Validated @ModelAttribute TodoForm todoForm, BindingResult bindingResult) {
+	public String create(@Validated @ModelAttribute TodoForm todoForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			// TODO:Flash error message
 			return "todos/new";
 		}
 		todoService.save(todoForm.toTodo());
-		// RedirectAttributes
+		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.delete", null, null));
 		return "redirect:todos/";
 	}
 	
