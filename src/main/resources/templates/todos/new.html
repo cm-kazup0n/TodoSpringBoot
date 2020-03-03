@@ -6,30 +6,33 @@
 <body>
 	<div>
 		<div th:replace="~{commons/header :: header}"></div>
-		<div class="container">
-			<form th:action="@{/todos}" th:method="POST" th:object="${todoForm}">
-				<div class="field">
-					<label class="label">Title</label>
-					<div class="control">
-						<input class="input" type="text" th:field="*{title}"/>
+		<div th:replace="${!#strings.isEmpty(param.errorMessage)} ? ~{commons/messages :: messageSuccess(${param.errorMessage})} : ~{}"></div>
+		<section class="section">
+			<div class="container">
+				<form th:action="@{/todos}" th:method="POST" th:object="${todoForm}">
+					<div class="field">
+						<label class="label">Title</label>
+						<div class="control">
+							<input class="input" type="text" th:field="*{title}"/>
+						</div>
 					</div>
-				</div>
-				<div class="field">
-					<label class="checkbox">
-						<input type="checkbox" th:field="*{done}"/>
-						done
-					</label>
-				</div>
-				<div class="field is-grouped">
-					<div class="control">
-						<input class="button is-link" type="submit" value="Submit"></input>
+					<div class="field">
+						<label class="checkbox">
+							<input type="checkbox" th:field="*{done}"/>
+							done
+						</label>
 					</div>
-					<div class="control">
-						<a class="button is-link is-light" href="/todos/">Cancel</a>
+					<div class="field is-grouped">
+						<div class="control">
+							<input class="button is-link" type="submit" value="Submit"></input>
+						</div>
+						<div class="control">
+							<a class="button is-link is-light" href="/todos/">Cancel</a>
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
+				</form>
+			</div>
+		</section>
 		<div th:replace="~{commons/footer :: footer}"></div>
 	</div>
 </body>
