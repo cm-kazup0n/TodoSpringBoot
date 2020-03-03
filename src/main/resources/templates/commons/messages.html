@@ -2,29 +2,27 @@
 <head>
 </head>
 <body>
-	<section class="section">
+	<section class="section" th:fragment="messageSuccess (message)">
 		<div class="container">
-			<article class="message is-success" th:fragment="messageSuccess">
+			<article class="message is-success">
 			  <div class="message-header">
 			    <p>Success</p>
-			    <button class="delete" aria-label="delete"></button>
 			  </div>
 			  <div class="message-body">
-			  	[[${param.infoMessage}]]
+			  	[[${message}]]
 			  </div>
 			</article>
 		</div>
 	</section>
 
-	<section class="section">
+	<section class="section" th:fragment="messageError (message)">
 		<div class="container">
-			<article class="message is-danger" th:fragment="messageError">
+			<article class="message is-danger">
 			  <div class="message-header">
 			    <p>Danger</p>
-			    <button class="delete" aria-label="delete"></button>
 			  </div>
 			  <div class="message-body">
-			    [[${param.errorMessage}]]
+			    [[${message}]]
 			  </div>
 			</article>
 		</div>

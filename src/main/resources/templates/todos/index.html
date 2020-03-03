@@ -5,8 +5,8 @@
 </head>
 <body>
 	<div>
-		<div th:insert="~{commons/header :: header}"></div>
-		<div th:insert="${!#strings.isEmpty(param.infoMessage)} ? ~{commons/messages :: messageSuccess} : ~{}"></div>
+		<div th:replace="~{commons/header :: header}"></div>
+		<div th:replace="${!#strings.isEmpty(param.infoMessage)} ? ~{commons/messages :: messageSuccess(${param.infoMessage})} : ~{}"></div>
 		<section class="section">
 			<div class="container">
 				<form action="/todos" th:method="POST">
@@ -24,7 +24,7 @@
 				</form>
 			</div>
 		</section>
-		<div th:insert="~{commons/footer :: footer}"></div>		
+		<div th:replace="~{commons/footer :: footer}"></div>		
 	</div>
 </body>
 </html>
