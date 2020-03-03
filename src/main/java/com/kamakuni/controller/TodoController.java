@@ -74,10 +74,11 @@ public class TodoController {
 	public String create(@Validated @ModelAttribute TodoForm todoForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			// TODO:Flash error message
-			return "todos/new";
+			redirectAttributes.addAttribute("errorMessage", messageSource.getMessage("error.todo.create", null, null));
+			return "redirect:todos/new";
 		}
 		todoService.save(todoForm.toTodo());
-		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.delete", null, null));
+		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.create", null, null));
 		return "redirect:todos/";
 	}
 	

@@ -6,10 +6,8 @@
 <body>
 	<div>
 		<div th:insert="~{commons/header :: header}"></div>
+		<div th:insert="${!#strings.isEmpty(param.infoMessage)} ? ~{commons/messages :: messageSuccess} : ~{}"></div>
 		<section class="section">
-			<div class="container">
-				<div th:insert="${infoMessage} ? ~{commons/messages :: messageSuccess} : ~{}"></div>
-			</div>
 			<div class="container">
 				<form action="/todos" th:method="POST">
 					<ol class="list is-hoverable">
