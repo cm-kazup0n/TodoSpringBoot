@@ -53,20 +53,20 @@ public class TodoController {
 	public ModelAndView update(@PathVariable("id") Optional<Long> idOpt,@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, ModelAndView mav, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			todoFormOpt.map(form -> mav.addObject("todoForm", form));
-			redirectAttributes.addAttribute("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
+			redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
 			mav.setViewName("redirect:/todos/edit");
 			return mav;
 		}
 		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
 		mav.setViewName("redirect:/todos");
-		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
+		redirectAttributes.addFlashAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
 		return mav;
 	}
 	
 	@DeleteMapping("{id}")
 	public String destory(@PathVariable("id") Optional<Long> idOpt, RedirectAttributes redirectAttributes) {
 		idOpt.ifPresent(id -> todoService.deleteById(id));
-		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.delete", null, null));
+		redirectAttributes.addFlashAttribute("infoMessage", messageSource.getMessage("success.todo.delete", null, null));
 		return "redirect:/todos";
 	}
 	
@@ -74,11 +74,11 @@ public class TodoController {
 	public String create(@Validated @ModelAttribute TodoForm todoForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			// TODO:Flash error message
-			redirectAttributes.addAttribute("errorMessage", messageSource.getMessage("error.todo.create", null, null));
+			redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("error.todo.create", null, null));
 			return "redirect:todos/new";
 		}
 		todoService.save(todoForm.toTodo());
-		redirectAttributes.addAttribute("infoMessage", messageSource.getMessage("success.todo.create", null, null));
+		redirectAttributes.addFlashAttribute("infoMessage", messageSource.getMessage("success.todo.create", null, null));
 		return "redirect:todos/";
 	}
 	
