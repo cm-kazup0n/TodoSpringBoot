@@ -10,7 +10,7 @@
 		<section class="section">
 			<div class="container">
 				<form action="/todos" th:method="POST">
-					<ol class="list is-hoverable">
+					<ol class="list is-hoverable" th:if="${!#lists.isEmpty(todos)}">
 						<li class="list-item" th:each="todo : ${todos}">
 							<input type="hidden" th:value="${todo.id}" />
 							<span th:text="${todo.title}"></span>
