@@ -21,13 +21,13 @@ public abstract class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
-	private Long id;
+	protected Long id;
 	
 	@Column(nullable = false)
-	private Date createAt;
+	protected Date createAt;
 
 	@Column(nullable = false)
-	private Date updateAt;
+	protected Date updateAt;
 	
 	@PrePersist
 	public void onPrePersist() {

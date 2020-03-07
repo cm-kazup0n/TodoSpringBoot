@@ -45,6 +45,7 @@ public class TodoController {
 
 	@GetMapping("{id}")
 	public String show(@PathVariable Optional<Long> idOpt) {
+		// TODO: error handling when item not found
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
 		return "todos/index";
 	}
@@ -57,7 +58,9 @@ public class TodoController {
 			mav.setViewName("redirect:/todos/edit");
 			return mav;
 		}
-		todoFormOpt.map(form -> todoService.save(form.toTodo())).orElseThrow(() -> new RuntimeException("Resource not found."));
+		// TODO: error handling when item not found
+		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
+		todoFormOpt.map(form -> todoService.save(todo.merge(form.getTitle(),form.getDone()))).orElseThrow(() -> new RuntimeException("Resource not found."));
 		mav.setViewName("redirect:/todos");
 		redirectAttributes.addFlashAttribute("infoMessage", messageSource.getMessage("success.todo.edit", null, null));
 		return mav;

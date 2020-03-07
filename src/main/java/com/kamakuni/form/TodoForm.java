@@ -29,6 +29,7 @@ public class TodoForm {
 	private Boolean done = false;
 	
 	public Todo toTodo() {
-		return new Todo(this.title, this.done);
+		return new Todo(this.id, this.title, this.done);
 	}
+	
 }
