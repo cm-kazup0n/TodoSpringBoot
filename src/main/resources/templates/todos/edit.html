@@ -6,9 +6,9 @@
 <body>
 	<div>
 		<div th:replace="~{commons/header :: header}"></div>
-		<div th:replace="${!#strings.isEmpty(errorMessage)} ? ~{commons/messages :: messageError(${errorMessage})} : ~{}"></div>
 		<section class="section">
 			<div class="container">
+				<div th:replace="${!#strings.isEmpty(errorMessage)} ? ~{commons/messages :: messageError(${errorMessage})} : ~{}"></div>	
 				<form th:action="@{/todos/} + *{id}" th:method="put" th:object="${todoForm}">
 					<input type="hidden" th:field="*{id}" />
 					<div class="field">

@@ -2,31 +2,27 @@
 <head>
 </head>
 <body>
-	<section class="section" th:fragment="messageSuccess (message)">
-		<div class="container">
-			<article class="message is-success">
-			  <div class="message-header">
-			    <p>Success</p>
-			  </div>
-			  <div class="message-body">
-			  	[[${message}]]
-			  </div>
-			</article>
-		</div>
-	</section>
+	<div class="container" th:fragment="messageSuccess (message)">
+		<article class="message is-success">
+		  <div class="message-header">
+		    <p>Success</p>
+		  </div>
+		  <div class="message-body">
+		  	[[${message}]]
+		  </div>
+		</article>
+	</div>
 
-	<section class="section" th:fragment="messageError (message)">
-		<div class="container">
-			<article class="message is-danger">
-			  <div class="message-header">
-			    <p>Error</p>
-			  </div>
-			  <div class="message-body">
-			    [[${message}]]
-			  </div>
-			</article>
-		</div>
-	</section>
+	<div class="container" th:fragment="messageError (message)">
+		<article class="message is-danger">
+		  <div class="message-header">
+		    <p>Error</p>
+		  </div>
+		  <div class="message-body">
+		    [[${message}]]
+		  </div>
+		</article>
+	</div>
 
 </body>
 </html>

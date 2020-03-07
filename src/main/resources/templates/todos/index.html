@@ -6,31 +6,29 @@
 <body>
 	<div>
 		<div th:replace="~{commons/header :: header}"></div>
-		<div th:replace="${!#strings.isEmpty(infoMessage)} ? ~{commons/messages :: messageSuccess(${infoMessage})} : ~{}"></div>
 		<section class="section">
 			<div class="container">
-				<form action="/todos" th:method="POST">
-					<table class="table">
-						<tbody th:if="${!#lists.isEmpty(todos)}">
-							<tr>
-								<th>Title</th>
-								<th>Done</th>
-								<th></th>
-							</tr>
-							<tr th:each="todo : ${todos}">
-								<th th:text="${todo.title}"></th>
-								<th th:text="${todo.done}"></th>
-								<th>
-									<a class="button" th:href="@{'/todos/' + ${todo.id} + '/edit'}">Edit</a>
-									<a class="button is-danger" th:href="@{'/todos/' + ${todo.id} + '/delete'}">Delete</a>								
-								</th>
-							</tr>
-						</tbody>
-					</table>
-					<div class="control">
-						<a class="button" href="/todos/new">new</a>
-					</div>
-				</form>
+				<div th:replace="${!#strings.isEmpty(infoMessage)} ? ~{commons/messages :: messageSuccess(${infoMessage})} : ~{}"></div>
+				<table class="table">
+					<tbody th:if="${!#lists.isEmpty(todos)}">
+						<tr>
+							<th>Title</th>
+							<th>Done</th>
+							<th></th>
+						</tr>
+						<tr th:each="todo : ${todos}">
+							<th th:text="${todo.title}"></th>
+							<th th:text="${todo.done}"></th>
+							<th>
+								<a class="button" th:href="@{'/todos/' + ${todo.id} + '/edit'}">Edit</a>
+								<a class="button is-danger" th:href="@{'/todos/' + ${todo.id} + '/delete'}">Delete</a>								
+							</th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="control">
+					<a class="button" href="/todos/new">new</a>
+				</div>
 			</div>
 		</section>
 		<div th:replace="~{commons/footer :: footer}"></div>		
