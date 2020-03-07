@@ -54,8 +54,8 @@ public class TodoController {
 	public ModelAndView update(@PathVariable("id") Optional<Long> idOpt,@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, ModelAndView mav, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			todoFormOpt.map(form -> mav.addObject("todoForm", form));
-			redirectAttributes.addFlashAttribute("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
-			mav.setViewName("redirect:/todos/edit");
+			mav.addObject("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
+			mav.setViewName("todos/edit");
 			return mav;
 		}
 		// TODO: error handling when item not found

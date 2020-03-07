@@ -6,31 +6,34 @@
 <body>
 	<div>
 		<div th:replace="~{commons/header :: header}"></div>
-		<div class="container">
-			<form th:action="@{/todos/} + *{id}" th:method="DELETE" th:object="${todoForm}">
-				<input type="hidden" th:field="*{id}" />
-				<div class="field">
-					<label class="label">Title</label>
-					<div class="control">
-						<input class="input" type="text" th:field="*{title}" disabled />
+		<div th:replace="${!#strings.isEmpty(errorMessage)} ? ~{commons/messages :: messageError(${errorMessage})} : ~{}"></div>
+		<section class="section">
+			<div class="container">
+				<form th:action="@{/todos/} + *{id}" th:method="DELETE" th:object="${todoForm}">
+					<input type="hidden" th:field="*{id}" />
+					<div class="field">
+						<label class="label">Title</label>
+						<div class="control">
+							<input class="input" type="text" th:field="*{title}" disabled />
+						</div>
 					</div>
-				</div>
-				<div class="field">
-					<label class="checkbox">
-						<input type="checkbox" th:field="*{done}" disabled />
-						done
-					</label>
-				</div>
-				<div class="field is-grouped">
-					<div class="control">
-						<input class="button is-danger" type="submit" value="Submit"></input>
+					<div class="field">
+						<label class="checkbox">
+							<input type="checkbox" th:field="*{done}" disabled />
+							done
+						</label>
 					</div>
-					<div class="control">
-						<a class="button is-link is-light" href="/todos/">Cancel</a>
-					</div>
-				</div>		
-			</form>
-		</div>
+					<div class="field is-grouped">
+						<div class="control">
+							<input class="button is-danger" type="submit" value="Submit"></input>
+						</div>
+						<div class="control">
+							<a class="button is-link is-light" href="/todos/">Cancel</a>
+						</div>
+					</div>		
+				</form>
+			</div>
+		</section>
 		<div th:replace="~{commons/footer :: footer}"></div>
 	</div>
 </body>
