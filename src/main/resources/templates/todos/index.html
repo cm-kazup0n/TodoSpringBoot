@@ -6,7 +6,7 @@
 <body>
 	<div>
 		<div th:replace="~{commons/header :: header}"></div>
-		<div th:replace="${!#strings.isEmpty(param.infoMessage)} ? ~{commons/messages :: messageSuccess(${param.infoMessage})} : ~{}"></div>
+		<div th:replace="${!#strings.isEmpty(infoMessage)} ? ~{commons/messages :: messageSuccess(${infoMessage})} : ~{}"></div>
 		<section class="section">
 			<div class="container">
 				<form action="/todos" th:method="POST">
