@@ -93,7 +93,7 @@ public class TodoController {
 	@GetMapping("{id}/edit")
 	public ModelAndView edit(@PathVariable("id") Optional<Long> idOpt, ModelAndView mav) {
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
-		mav.addObject("todoForm", TodoForm.create(todo.getId(), todo.getTitle(), todo.getDone()));
+		mav.addObject("todoForm", new TodoForm(todo.getId(), todo.getTitle(), todo.getDone()));
 		mav.setViewName("todos/edit");
 		return mav;
 	}
@@ -101,7 +101,7 @@ public class TodoController {
 	@GetMapping("{id}/delete")
 	public ModelAndView delete(@PathVariable("id") Optional<Long> idOpt, ModelAndView mav) {
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
-		mav.addObject("todoForm", TodoForm.create(todo.getId(), todo.getTitle(), todo.getDone()));
+		mav.addObject("todoForm", new TodoForm(todo.getId(), todo.getTitle(), todo.getDone()));
 		mav.setViewName("todos/delete");
 		return mav;
 	}

@@ -41,7 +41,7 @@ public class Todo extends BaseEntity {
 	@Column(nullable = false)
 	private Boolean done;
 	
-	public Todo merge(String title, Boolean Done) {
+	public Todo merge(String title, Boolean done) {
 		Todo clone = new Todo(this);
 		clone.setTitle(title);
 		clone.setDone(done);
