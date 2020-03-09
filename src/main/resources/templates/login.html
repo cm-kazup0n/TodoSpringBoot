@@ -8,17 +8,17 @@
 		<div th:replace="~{commons/header :: header}"></div>
 		<section class="section">
 			<div class="container">
-				<form th:action="@{/login}" th:method="POST">
+				<form th:action="@{/authenticate}" th:method="POST" th:object="${form}">
 					<div class="field">
 						<label class="label">Email</label>
 						<div class="control">
-							<input class="input" type="text" name="email" />
+							<input class="input" type="text" th:field="*{email}" />
 						</div>
 					</div>
 					<div class="field">
 						<label class="label">Password</label>
 						<div class="control">
-							<input class="input" type="text" name="password" />
+							<input class="input" type="text" th:field="*{password}" />
 						</div>
 					</div>
 					<div class="field">
