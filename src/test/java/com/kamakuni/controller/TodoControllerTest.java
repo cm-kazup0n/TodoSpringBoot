@@ -33,4 +33,13 @@ public class TodoControllerTest {
 			.andExpect(status().isOk());
 	}
 
+	@Test
+	@WithMockUser
+	public void shouldReturnNewView() throws Exception {
+		this.mockMvc.perform(get("/todos/new"))
+			.andExpect(view().name("todos/new"))
+			.andExpect(status().isOk());
+	}
+
+	
 }
