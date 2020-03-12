@@ -1,7 +1,12 @@
 package com.kamakuni.controller;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -18,6 +23,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.kamakuni.entity.Todo;
+import com.kamakuni.form.TodoForm;
 import com.kamakuni.service.TodoService;
 
 @ExtendWith(SpringExtension.class)
@@ -62,6 +68,22 @@ public class TodoControllerTest {
 		this.mockMvc.perform(get("/todos/1/delete"))
 			.andExpect(view().name("todos/delete"))
 			.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser
+	public void shouldBeRedirectedToNewView() throws Exception {
+		this.mockMvc.perform(post("/todos").flashAttr("todoForm", new TodoForm()).with(csrf()))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("todos/new"));
+	}
+
+	@Test
+	@WithMockUser
+	public void shouldBeRedirectedToEditView() throws Exception {
+		this.mockMvc.perform(put("/todos/1").flashAttr("todoForm", new TodoForm()).with(csrf()))
+			.andExpect(status().isFound())
+			.andExpect(redirectedUrl("todos/edit"));
 	}
 
 	

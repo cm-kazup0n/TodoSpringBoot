@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,6 +55,7 @@ public class TodoController {
 	public ModelAndView update(@PathVariable("id") Optional<Long> idOpt,@Validated @ModelAttribute Optional<TodoForm> todoFormOpt, BindingResult bindingResult, ModelAndView mav, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			todoFormOpt.map(form -> mav.addObject("todoForm", form));
+			//mav.setStatus(HttpStatus.BAD_REQUEST);
 			mav.addObject("errorMessage", messageSource.getMessage("error.todo.edit", null, null));
 			mav.setViewName("todos/edit");
 			return mav;
