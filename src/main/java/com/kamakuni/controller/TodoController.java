@@ -96,7 +96,7 @@ public class TodoController {
 	public ModelAndView edit(@PathVariable("id") Optional<Long> idOpt, ModelAndView mav) {
 		Todo todo = idOpt.flatMap(id -> todoService.findOne(id)).orElse(new Todo());
 		mav.addObject("todoForm", new TodoForm(todo.getId(), todo.getTitle(), todo.getDone()));
-		mav.setViewName("todos/edit");
+		mav.setViewName("redirect:todos/edit");
 		return mav;
 	}
 

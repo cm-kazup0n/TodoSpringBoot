@@ -8,6 +8,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:5.7
+        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MySQLRootPassword }}
+
     steps:
     - uses: actions/checkout@v2
 
@@ -23,4 +30,4 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with maven
-      run: mvn test
+      run: mvn test -DMYSQL_PASSWORD=${{ secrets.MySQLRootPassword }}
