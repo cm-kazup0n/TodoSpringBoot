@@ -25,6 +25,11 @@ jobs:
     - name: Verify MySQL connection from host
       run: |
          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+    - name: Initialize Database
+      run: |
+         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} \
+         -uroot -ppassword \
+         -e "CREATE DATABASE IF NOT EXISTS todoapp; CREATE USER 'todoapp'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON todoapp.* TO 'todoapp'@'localhost';"
 
     - uses: actions/checkout@v2
 
